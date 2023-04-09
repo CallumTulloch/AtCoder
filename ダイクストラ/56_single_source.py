@@ -1,15 +1,16 @@
 import heapq
 
-def dijkstra(node_info):
+def dijkstra(node_info, start):
     """各ノードの最短経路を求める"""
     nodes_min = {k:float('inf') for k in range(V)}   # node の初期化. 最短経路が更新されていく．
     
-    node_paths = []    
-    heapq.heappush(node_paths, [0, [0]])        # 最初は 0 node． [dist, [path]] の第1引数を基準に常にソートされている．
+    node_paths = []
+    nodes_min[start] = 0    
+    heapq.heappush(node_paths, [0, [start]])        # 最初は 0 node． [dist, [path]] の第1引数を基準に常にソートされている．
     
     while len(node_paths) > 0:
-        _, node_path = heapq.heappop(node_paths)
-        dist_from = node_path[0]
+        dist_from, node_path = heapq.heappop(node_paths)
+        #dist_from = node_path[0]
         last_node = node_path[-1]               # path の一番後ろのノードを次に探索する．
         for path in node_info[last_node]:
             node, dist_to =  path[0], path[1]
@@ -34,7 +35,8 @@ if __name__ == '__main__':
     for start, end, dist in STD:                # 各エッジの start, end, dist
         node_info[start].append((end, dist))    # node[0] は A からのパス(node)と距離
     
-    min_path_for_each_node = dijkstra(node_info)
+    #print(node_info)
+    min_path_for_each_node = dijkstra(node_info, r)
     for min_dist in min_path_for_each_node.values():
         print(min_dist)
 
