@@ -21,7 +21,7 @@ for i in range(n):
             dp[i][j] = 1
 
 for m in M:
-    if dp[-1][m] == 1:
+    if dp[-1][m]:
         print('yes')
     else:
         print('no')
