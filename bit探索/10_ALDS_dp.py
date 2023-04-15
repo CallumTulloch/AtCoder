@@ -23,7 +23,5 @@ for i in range(n):
 for m in M:
     if dp[-1][m] == 1:
         print('yes')
-        print('yes')
-        print('yes')
     else:
         print('no')
